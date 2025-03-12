@@ -1,1 +1,35 @@
-body {background: yellow}
+@import url(fonts.css);
+
+.header {
+    position: sticky;
+    top: 0;
+    padding: 20px;
+}
+
+body {
+    background: #212121;
+    color: #fff
+}
+
+.page {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    flex: 1 1 auto;
+}
+
+.footer {
+    composes: page;
+    min-height: 0;
+}
+
+h1 {
+    font-family: Jost, sans-serif;
+    font-weight: 400
+}
