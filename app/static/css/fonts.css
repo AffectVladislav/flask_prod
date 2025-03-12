@@ -3,12 +3,12 @@
     font-family: 'Jost';
     font-style: normal;
     font-weight: 400;
-    src: url("../fonts/jost/Jost-Regular.ttf");
+    src: url("../fonts/Jost/Jost-Regular.ttf");
 }
 
 @font-face {
     font-family: 'Jost';
     font-style: normal;
     font-weight: 600;
-    src: url("../fonts/jost/Jost-Bold.ttf");
+    src: url("../fonts/Jost/Jost-Bold.ttf");
 }
