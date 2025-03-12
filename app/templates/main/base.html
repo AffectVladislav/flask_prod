@@ -7,6 +7,15 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    {% block content %}{% endblock %}
+<header class="header">{% include 'main/_header.html' %}</header>
+<div class="page">
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+</div>
+<footer class="footer">{% include 'main/_footer.html' %}</footer>
+
+<script src="{{  url_for('static', filename='js/libs/bootstrap.min.js')}}"></script>
+<script src="{{  url_for('static', filename='js/app.js')}}"></script>
 </body>
 </html>
