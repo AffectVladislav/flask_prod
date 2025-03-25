@@ -15,6 +15,12 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app, db)
+    login_manager.init_app(app)
+
+    # LOGIN MANAGER
+    login_manager.login_view = 'user.login'
+    login_manager.login_message = 'Вы не может получить доступ пока не войдет в аккаунт '
+    login_manager.login_message_category = 'info'
 
     with app.app_context():
         db.create_all()
