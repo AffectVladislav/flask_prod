@@ -10,3 +10,6 @@ def create_user(name):
     db.session.add(new_user)
     db.session.commit()
     return 'User Created Successfully'
+def logout():
+    logout_user()
+    return redirect(url_for('post.all'))
