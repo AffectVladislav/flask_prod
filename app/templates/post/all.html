@@ -22,13 +22,30 @@
         </tr>
         </thead>
         <tbody>
-            {% for post in posts %}
-            <tr>
-                <td>{{post.teacher}}</td>
-                <td>{{post.subject}}</td>
-                <td>{{post.student}}</td>
-            </tr>
-            {% endfor %}
+        {% for post in posts %}
+        <tr>
+            <td>
+                <img src="{{ url_for('static', filename='uploads/'+post.author.avatar) }}" alt="author avatar">
+                {{post.author.username}}
+            </td>
+            <td>{{post.subject}}</td>
+            <td>{{post.student}}</td>
+            {% if current_user.is_authenticated %}
+            <td>
+                    <a href="{{ url_for('post.update', id=post.id) }}" style="text-decoration: none;">
+                        <img class="icon_png"
+                             src="{{ url_for('static', filename='icon_png/edit.png') }}"
+                             alt="edit icon">
+                    </a>
+                    <a href="{{ url_for('post.delete', id=post.id) }}" style="text-decoration: none;">
+                        <img class="icon_png"
+                             src="{{ url_for('static', filename='icon_png/trash-bin.png') }}"
+                             alt="trash bin">
+                    </a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>
