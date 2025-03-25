@@ -11,24 +11,29 @@ post = Blueprint('post', __name__)
 
 @post.route('/', methods=['GET', 'POST'])
 def all():
-    posts = Post.query.all()
+    posts = Post.query.order_by(Post.date.desc()).all()
     return render_template('post/all.html', posts=posts)
 
 
 @post.route('/post/create', methods=['GET', 'POST'])
+@login_required
 def create():
+    form = StudentForm()
+    form.student.choices = [s.username for s in User.query.filter_by(status=False)] #   Фильтр учеников "все кто False в бд"
     if request.method == 'POST':
-        teacher = request.form.get('teacher')
         subject = request.form.get('subject')
         student = request.form.get('student')
+        student_id = User.query.filter_by(username=student).first().id
 
-        post = Post(teacher=teacher, subject=subject, student=student)
+        post = Post(teacher=current_user.id, subject=subject, student=student_id)
         try:
             db.session.add(post)
             db.session.commit()
             return redirect('/')
         except Exception as e:
             print(str(e))
+    else:
+        return render_template('post/create.html', form=form)
 
 
 @post.route('/post/<int:id>/update', methods=['GET', 'POST'])
