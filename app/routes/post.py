@@ -1,4 +1,8 @@
 from flask import Blueprint, render_template, request, redirect
+from flask_login import login_required, current_user
+
+from ..models.user import User
+from ..forms import StudentForm
 from ..extensions import db
 from ..models.post import Post
 
