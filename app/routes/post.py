@@ -27,8 +27,24 @@ def create():
             print(str(e))
 
 
+@post.route('/post/<int:id>/update', methods=['GET', 'POST'])
+@login_required
+def update(id):
+    post = Post.query.get(id)
+    if request.method == 'POST':
+        post.teacher = request.form.get('teacher')
+        post.subject = request.form.get('subject')
+        post.student = request.form.get('student')
+
+        try:
+            db.session.commit()
+            return redirect('/')
+        except Exception as e:
+            print(str(e))
     else:
-        return render_template('post/create.html')
+        return render_template('post/update.html', post=post)
+
+
 @post.route('/post/<int:id>/delete', methods=['GET', 'POST'])
 @login_required
 def delete(id):
