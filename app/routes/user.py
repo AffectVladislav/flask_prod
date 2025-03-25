@@ -1,5 +1,11 @@
-from flask import Blueprint
-from ..extensions import db
+from urllib import request
+from flask_login import login_user, logout_user
+
+from flask import Blueprint, render_template, redirect, flash, url_for, request
+
+from ..functions import save_picture
+from ..forms import RegisterForm, LoginForm
+from ..extensions import db, bcrypt
 from ..models.user import User
 
 user = Blueprint('user', __name__)
