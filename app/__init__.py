@@ -1,5 +1,6 @@
 from flask import Flask
-from .extensions import db, migrate
+
+from .extensions import db, migrate, login_manager
 from .config import Config
 from .routes.post import post
 from .routes.user import user
