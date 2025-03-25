@@ -25,9 +25,32 @@
     </ul>
 
     <div class="text-end">
-        <button type="button" class="btn btn-outline-light me-2"><font style="vertical-align: inherit;"><font
-                style="vertical-align: inherit;">Login</font></font></button>
-        <button type="button" class="btn btn-warning"><font style="vertical-align: inherit;"><font
-                style="vertical-align: inherit;">Sign-up</font></font></button>
+        {% if current_user.is_authenticated %}
+            <span>
+                Добро пожаловать! {{ current_user.login }}
+            </span>
+            <a href="{{ url_for('user.logout')}}" style="text-decoration: none;">
+                <button type="button" class="btn btn-outline-light me-2">
+                    <font style="vertical-align: inherit;">
+                        Выйти
+                    </font>
+                </button>
+            </a>
+        {% else %}
+            <a href="{{ url_for('user.login')}}" style="text-decoration: none;">
+                <button type="button" class="btn btn-outline-light me-2">
+                    <font style="vertical-align: inherit;">
+                        Войти
+                    </font>
+                </button>
+            </a>
+            <a href="{{ url_for('user.register')}}" style="text-decoration: none;">
+                <button type="button" class="btn btn-warning ">
+                    <font style="vertical-align: inherit;">
+                        Регистрация
+                    </font>
+                </button>
+            </a>
+        {% endif %}
     </div>
 </div>
