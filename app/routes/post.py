@@ -29,3 +29,14 @@ def create():
 
     else:
         return render_template('post/create.html')
+@post.route('/post/<int:id>/delete', methods=['GET', 'POST'])
+@login_required
+def delete(id):
+    post = Post.query.get(id)
+    try:
+        db.session.delete(post)
+        db.session.commit()
+        return redirect('/')
+    except Exception as e:
+        print(str(e))
+        return str(e)
