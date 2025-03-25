@@ -1,4 +1,7 @@
-from ..extensions import db
+from datetime import datetime
+
+from .post import Post
+from ..extensions import db, login_manager
 from flask_login import UserMixin
 
 
