@@ -8,6 +8,12 @@
 {% endblock %}
 
 
+<form method="post" class="form-control d-flex flex-row gap-2" id="teacherForm">
+    {{ form.csrf_token }}
+    {{ form.teacher }}
+    <input type="submit" class="btn btn-success" value="Показать">
+</form>
+
 {% block content %}
 <div class="table-responsive custom-table-responsive">
     <table class="table custom-table">
