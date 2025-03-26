@@ -11,8 +11,17 @@ post = Blueprint('post', __name__)
 
 @post.route('/', methods=['GET', 'POST'])
 def all():
-    posts = Post.query.order_by(Post.date.desc()).all()
-    return render_template('post/all.html', posts=posts)
+    form = TeacherForm()
+    form.teacher.choices = [t.username for s in User.query.filter_by(status=True)]
+
+    if request.method == 'POST':
+        teacher = request.form.get('teacher')
+        teacher_id = User.query.filter_by(username=teacher).first().id
+        teacher_id = Post.query.filter_by(username=teacher.id).order_by(Post.data.desc()).limit(20).all()
+
+    else:
+        posts = Post.query.order_by(Post.date.desc()).all()
+    return render_template('post/all.html', posts=posts, user=User, form=form)
 
 
 @post.route('/post/create', methods=['GET', 'POST'])
