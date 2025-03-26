@@ -74,10 +74,13 @@ def update(id):
 @login_required
 def delete(id):
     post = Post.query.get(id)
-    try:
-        db.session.delete(post)
-        db.session.commit()
-        return redirect('/')
-    except Exception as e:
-        print(str(e))
-        return str(e)
+    if post.author.id == current_user.id:
+        try:
+            db.session.delete(post)
+            db.session.commit()
+            return redirect('/')
+        except Exception as e:
+            print(str(e))
+            return str(e)
+    else:
+        abort(403)
