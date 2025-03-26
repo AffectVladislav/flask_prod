@@ -61,13 +61,15 @@ def update(id):
 
             post.student = User.query.filter_by(username=student).first().id
 
-        try:
-            db.session.commit()
-            return redirect('/')
-        except Exception as e:
-            print(str(e))
+            try:
+                db.session.commit()
+                return redirect('/')
+            except Exception as e:
+                print(str(e))
+        else:
+            return render_template('post/update.html', post=post, form=form)
     else:
-        return render_template('post/update.html', post=post)
+        abort(403)
 
 
 @post.route('/post/<int:id>/delete', methods=['GET', 'POST'])
