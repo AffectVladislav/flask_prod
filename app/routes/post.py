@@ -49,10 +49,17 @@ def create():
 @login_required
 def update(id):
     post = Post.query.get(id)
-    if request.method == 'POST':
-        post.teacher = request.form.get('teacher')
-        post.subject = request.form.get('subject')
-        post.student = request.form.get('student')
+
+    if post.author.id == current_user.id:
+
+        form = StudentForm()
+        form.student.data = User.query.filter_by(id=post.student).first().username
+        form.student.choices = [s.username for s in User.query.filter_by(status=False)]
+        if request.method == 'POST':
+            post.subject = request.form.get('subject')
+            student = request.form.get('student')
+
+            post.student = User.query.filter_by(username=student).first().id
 
         try:
             db.session.commit()
