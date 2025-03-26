@@ -33,3 +33,6 @@ class LoginForm(FlaskForm):
 
 class StudentForm(FlaskForm):
     student = SelectField('student', choices=[], render_kw={'class':'form-control'})
+
+class TeacherForm(FlaskForm):
+    student = SelectField('student', choices=[], render_kw={'class':'form-control'})
