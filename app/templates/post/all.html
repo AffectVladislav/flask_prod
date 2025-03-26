@@ -12,14 +12,12 @@
 <div class="table-responsive custom-table-responsive">
     <table class="table custom-table">
         <thead>
-        <tr>
-            <th scope="col">Преподаватель</th>
-            <th scope="col">Тема</th>
-            <th scope="col">Студент</th>
-            {% if current_user.is_authenticated %}
+            <tr>
+                <th scope="col">Преподаватель</th>
+                <th scope="col">Тема</th>
+                <th scope="col">Студент</th>
                 <th scope="col">Действия</th>
-            {% endif %}
-        </tr>
+            </tr>
         </thead>
         <tbody>
         {% for post in posts %}
