@@ -25,3 +25,10 @@ def save_picture(picture):
         raise ValueError(f"Ошибка при сохранении изображения: {e}")
 
     return picture_fn
+
+def recursive_flatten_iterator(d):
+    for k, v in d.items():
+        if isinstance(v, list):
+            yield v
+        if isinstance(v, dict):
+            yield from recursive_flatten_iterator(v)
