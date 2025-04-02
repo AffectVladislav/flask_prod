@@ -31,8 +31,11 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Войти")
 
 
-class StudentForm(FlaskForm):
-    student = SelectField('student', choices=[], render_kw={'class':'form-control'})
+class BaseForm(FlaskForm):
+    select_field = SelectField('Select', choices=[], render_kw={'class': 'form-control'})
 
-class TeacherForm(FlaskForm):
-    student = SelectField('student', choices=[], render_kw={'class':'form-control'})
+class StudentForm(BaseForm):
+    student = BaseForm.select_field
+
+class TeacherForm(BaseForm):
+    teacher = BaseForm.select_field
