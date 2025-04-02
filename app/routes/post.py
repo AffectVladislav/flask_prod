@@ -12,15 +12,15 @@ post = Blueprint('post', __name__)
 @post.route('/', methods=['GET', 'POST'])
 def all():
     form = TeacherForm()
-    form.teacher.choices = [t.username for s in User.query.filter_by(status=True)]
+    form.teacher.choices = [t.username for t in User.query.filter_by(status=True)]
 
     if request.method == 'POST':
         teacher = request.form.get('teacher')
         teacher_id = User.query.filter_by(username=teacher).first().id
-        teacher_id = Post.query.filter_by(username=teacher.id).order_by(Post.data.desc()).limit(20).all()
+        posts = Post.query.filter_by(teacher=teacher_id).order_by(Post.date.desc()).all()
 
     else:
-        posts = Post.query.order_by(Post.date.desc()).all()
+        posts = Post.query.order_by(Post.date.desc()).limit(20).all()
     return render_template('post/all.html', posts=posts, user=User, form=form)
 
 
@@ -28,7 +28,8 @@ def all():
 @login_required
 def create():
     form = StudentForm()
-    form.student.choices = [s.username for s in User.query.filter_by(status=False)] #   Фильтр учеников "все кто False в бд"
+    form.student.choices = [s.username for s in
+                            User.query.filter_by(status=False)]  # Фильтр учеников "все кто False в бд"
     if request.method == 'POST':
         subject = request.form.get('subject')
         student = request.form.get('student')
