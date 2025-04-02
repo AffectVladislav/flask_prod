@@ -3,18 +3,20 @@
 {% block title %}Темы{% endblock %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/blocks/table.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/icon.css') }}">
+{% assets 'post_all_css' %}
+<link rel="stylesheet" href="{{ ASSET_URL }}">
+{% endassets %}
 {% endblock %}
 
 
+
+{% block content %}
 <form method="post" class="form-control d-flex flex-row gap-2" id="teacherForm">
     {{ form.csrf_token }}
     {{ form.teacher }}
     <input type="submit" class="btn btn-success" value="Показать">
 </form>
 
-{% block content %}
 <div class="table-responsive custom-table-responsive">
     <table class="table custom-table">
         <thead>
@@ -64,4 +66,9 @@
         </tbody>
     </table>
 </div>
+{% endblock %}
+
+
+{% block script %}
+{% assets 'post_all_js' %}<script type="text/javascript" src="{{ ASSET_URL }}"></script>{% endassets %}
 {% endblock %}
